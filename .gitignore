@@ -1,0 +1,141 @@
+############################################################
+# 🔒 KAIRO – GLOBAL .GITIGNORE (ASP.NET + BLASOR + EF CORE)
+############################################################
+
+############################
+# 🔧 Visual Studio / IDE
+############################
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+
+############################
+# 🧱 Build results
+############################
+bin/
+obj/
+out/
+build/
+[Bb]uild[Ll]og.*
+
+############################
+# 📦 NuGet
+############################
+*.nupkg
+*.snupkg
+packages/
+.project.assets.json
+.packages.lock.json
+
+# NuGet cache
+**/project.assets.json
+**/project.nuget.cache
+
+############################
+# 🌐 ASP.NET Core / Blazor
+############################
+appsettings.Development.json
+appsettings.Local.json
+appsettings.Production.json
+
+# secrets (VERY IMPORTANT)
+secrets.json
+*.Secrets.json
+secrets.dev.json
+
+# user secrets (dotnet user-secrets)
+**/secrets.json
+
+############################
+# 🗄️ Database / EF Core
+############################
+*.mdf
+*.ldf
+*.sqlite
+*.db
+*.db-shm
+*.db-wal
+
+Migrations/*Designer.cs
+Migrations/*Snapshot.cs
+
+# local DB files
+*.db3
+
+############################
+# 🧪 Logs / runtime
+############################
+*.log
+logs/
+log/
+*.trace
+
+############################
+# 💻 OS files
+############################
+.DS_Store
+Thumbs.db
+desktop.ini
+
+############################
+# 🧪 Test / coverage
+############################
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+############################
+# 📦 Node (si Blazor WASM ou tooling front)
+############################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+dist/
+wwwroot/dist/
+
+############################
+# 🔐 Keys / secrets / certs
+############################
+*.pfx
+*.key
+*.pem
+*.crt
+*.cer
+
+############################
+# ☁️ Publish / deploy
+############################
+publish/
+*.publishsettings
+
+############################
+# 🧠 Rider / JetBrains (si utilisé)
+############################
+.idea/
+*.sln.iml
+
+############################
+# ⚙️ Temporary files
+############################
+*.tmp
+*.temp
+*.cache
+
+############################
+# 🚨 Sensitive fallback (VERY STRICT)
+############################
+**/appsettings.*.json
+!**/appsettings.json
+
+############################################################
+# END OF KAIRO .GITIGNORE
+############################################################
