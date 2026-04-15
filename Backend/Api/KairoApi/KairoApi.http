@@ -1,0 +1,6 @@
+@KairoApi_HostAddress = http://localhost:5152
+
+GET {{KairoApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

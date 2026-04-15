@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="../KairoApi.Business/KairoApi.Business.csproj" />
+  <Project Path="../KairoApi.Data/KairoApi.Data.csproj" />
+  <Project Path="../KairoApi.Db/KairoApi.Db.csproj" />
+  <Project Path="../KairoApi.Dto/KairoApi.Dto.csproj" />
+  <Project Path="../KairoApi.Model/KairoApi.Model.csproj" />
+  <Project Path="KairoApi.App.csproj" />
+</Solution>
