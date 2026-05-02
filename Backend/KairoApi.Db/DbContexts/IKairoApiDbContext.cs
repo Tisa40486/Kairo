@@ -9,4 +9,4 @@ namespace KairoApi.Db.DbContexts
         public DbSet<UserDao> Users { get; set; }
         public DbSet<TaskDao> Tasks { get; set; }
     }
-}
+}   
