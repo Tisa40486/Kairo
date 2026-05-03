@@ -1,8 +1,8 @@
 ﻿namespace KairoApi.Dto
 {
-    public class TaskReponse
+    public class TaskInput
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public required string Title { get; set; }
         public string? Description { get; set; }
     }
