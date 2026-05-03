@@ -9,6 +9,7 @@ namespace KairoApi.Business
         public KairoApiProfile() 
         {
             CreateMap<TaskDao, TaskReponse>();
+            CreateMap<TaskInput, TaskDao>();
         }
     }
 }
