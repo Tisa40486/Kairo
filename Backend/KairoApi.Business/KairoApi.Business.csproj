@@ -16,9 +16,5 @@
     <ProjectReference Include="..\KairoApi.Db\KairoApi.Db.csproj" />
     <ProjectReference Include="..\KairoApi.Dto\KairoApi.Dto.csproj" />
   </ItemGroup>
-	
-	<ItemGroup>
-	  <Folder Include="Task\Command\" />
-	</ItemGroup>
 
 </Project>
