@@ -2,24 +2,28 @@ services:
   mariadb:
     image: mariadb:latest
     container_name: mariadb
+    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=mabase
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password 
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: Kairodb
+      MARIADB_USER: user
+      MARIADB_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
-      
+
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin:latest
     container_name: phpmyadmin
+    restart: always
     environment:
-      - PMA_HOST=mariadb
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
     ports:
       - "8080:80"
     depends_on:
       - mariadb
+
 volumes:
   mariadb_data:
