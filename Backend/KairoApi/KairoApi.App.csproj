@@ -23,7 +23,7 @@
 	  <ProjectReference Include="..\KairoApi.Business\KairoApi.Business.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Worker\" />
+	  <Folder Include="Worker\Docker\DatabaseLocal\" />
 	</ItemGroup>
 
 </Project>
