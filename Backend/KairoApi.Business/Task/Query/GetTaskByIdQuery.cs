@@ -26,11 +26,15 @@ namespace KairoApi.Business.Task.Query
         public async Task<TaskReponse?> Handle(GetTaskByIdQuery request, CancellationToken cancellationToken)
         {
             var data = await _uow.TaskRepository.GetByIdAsync(request.Id);
+            var status = await _uow.StatusRepository.GetByIdAsync(data.StatusDaoId.Value);
 
             if (data == null)
                 return null;
 
             var result = _mapper.Map<TaskReponse>(data);
+            var resultStatus = _mapper.Map<StatusResponse>(status);
+            result.Status = resultStatus;
+
             return result;
         }
 

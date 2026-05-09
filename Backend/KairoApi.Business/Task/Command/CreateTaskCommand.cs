@@ -23,8 +23,15 @@ namespace KairoApi.Business.Task.Command
         {
             if (request.Id is null)
             {
-                var data = _mapper.Map<TaskDao>(request);
+                var statusEntity = await _uow.StatusRepository.GetByIdAsync(request.StatusId);
 
+                var data = _mapper.Map<TaskDao>(request);
+                if (statusEntity is not null)
+                {
+                    data.StatusDaoId = statusEntity.Id;
+                    data.LKP_StatusDao = statusEntity;
+
+                }
                 await _uow.TaskRepository.AddAndSaveAsync(data);
             }
             else

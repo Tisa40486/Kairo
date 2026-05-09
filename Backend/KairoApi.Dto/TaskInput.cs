@@ -6,5 +6,6 @@
         public required string Title { get; set; }
         public string? Description { get; set; }
         public bool? Done { get; set; }
+        public required int StatusId { get; set; }
     }
 }

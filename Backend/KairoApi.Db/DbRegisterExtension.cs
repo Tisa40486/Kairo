@@ -12,6 +12,7 @@ namespace KairoApi.Db
         {
             services.AddScoped<IKairoApiDbContext, KairoApiDbContext>();
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IStatusRepository, StatusRepository>();
 
 
             services.AddScoped<IKairoApiUnitOfWork, KairoApiUnitOfWork>();

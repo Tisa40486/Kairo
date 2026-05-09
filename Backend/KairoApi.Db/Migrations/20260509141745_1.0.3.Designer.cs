@@ -3,6 +3,7 @@ using KairoApi.Db.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KairoApi.Db.Migrations
 {
     [DbContext(typeof(KairoApiDbContext))]
-    partial class KairoApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260509141745_1.0.3")]
+    partial class _103
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,50 +26,50 @@ namespace KairoApi.Db.Migrations
 
             modelBuilder.Entity("KairoApi.Model.LKP.LKP_StatusDao", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("LKP_KairoApi_Status");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            id = 1,
                             Name = "To do"
                         },
                         new
                         {
-                            Id = 2,
+                            id = 2,
                             Name = "Doing"
                         },
                         new
                         {
-                            Id = 3,
+                            id = 3,
                             Name = " In Review"
                         },
                         new
                         {
-                            Id = 4,
+                            id = 4,
                             Name = "Done"
                         });
                 });
 
             modelBuilder.Entity("KairoApi.Model.TaskDao", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
@@ -74,7 +77,7 @@ namespace KairoApi.Db.Migrations
                     b.Property<bool>("Done")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("LKP_StatusDaoId")
+                    b.Property<int?>("LKP_StatusDaoid")
                         .HasColumnType("int");
 
                     b.Property<int?>("StatusDaoId")
@@ -85,20 +88,20 @@ namespace KairoApi.Db.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
-                    b.HasIndex("LKP_StatusDaoId");
+                    b.HasIndex("LKP_StatusDaoid");
 
                     b.ToTable("KairoApi_Task");
                 });
 
             modelBuilder.Entity("KairoApi.Model.UserDao", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -115,7 +118,7 @@ namespace KairoApi.Db.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("KairoApi_User");
                 });
@@ -124,7 +127,7 @@ namespace KairoApi.Db.Migrations
                 {
                     b.HasOne("KairoApi.Model.LKP.LKP_StatusDao", "LKP_StatusDao")
                         .WithMany()
-                        .HasForeignKey("LKP_StatusDaoId");
+                        .HasForeignKey("LKP_StatusDaoid");
 
                     b.Navigation("LKP_StatusDao");
                 });

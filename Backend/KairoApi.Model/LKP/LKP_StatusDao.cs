@@ -3,10 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KairoApi.Model.LKP
 {
-    [Table("LKP_KairoApi_Categories")]
-    public class Categories : IModelDao
+    [Table("LKP_KairoApi_Status")]
+
+    public class LKP_StatusDao : IModelDao
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public required string Name { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace KairoApi.Data.Repository
             return await query.ToListAsync();
         }
 
-        public async Task AddAndSaveAsync(TModelDao entity)
+        public virtual async Task AddAndSaveAsync(TModelDao entity)
         {
             await _context.Set<TModelDao>().AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -38,7 +38,7 @@ namespace KairoApi.Data.Repository
             if (withNoTracking)
                 query = query.AsNoTracking();
 
-            return await query.FirstOrDefaultAsync(x => x.id == id);
+            return await query.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task RemoveByIdAsync(int id, bool withNoTracking = true)
