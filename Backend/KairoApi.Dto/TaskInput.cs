@@ -5,7 +5,7 @@
         public int? Id { get; set; }
         public required string Title { get; set; }
         public string? Description { get; set; }
-        public bool? Done { get; set; }
-        public required int StatusId { get; set; }
+        public bool? Done { get; set; } = false;
+        public required int StatusDaoId { get; set; }
     }
 }

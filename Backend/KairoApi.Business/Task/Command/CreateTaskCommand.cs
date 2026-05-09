@@ -23,7 +23,7 @@ namespace KairoApi.Business.Task.Command
         {
             if (request.Id is null)
             {
-                var statusEntity = await _uow.StatusRepository.GetByIdAsync(request.StatusId);
+                var statusEntity = await _uow.StatusRepository.GetByIdAsync(request.StatusDaoId);
 
                 var data = _mapper.Map<TaskDao>(request);
                 if (statusEntity is not null)
@@ -37,6 +37,10 @@ namespace KairoApi.Business.Task.Command
             else
             {
                 var data = await _uow.TaskRepository.GetByIdAsync(request.Id.Value) ?? throw new Exception("Id not found");
+                var status = await _uow.StatusRepository.GetByIdAsync(request.StatusDaoId);
+
+
+                data.LKP_StatusDao = status;
 
                 _mapper.Map<TaskInput, TaskDao>(request, data);
 
