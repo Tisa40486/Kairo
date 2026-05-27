@@ -3,64 +3,60 @@ using KairoApi.Business.Task.Query;
 using KairoApi.Db;
 using Microsoft.OpenApi.Models;
 
-namespace KairoApi.App
+namespace KairoApi.App;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddCors(options =>
         {
-            var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddCors(options =>
+            options.AddPolicy("AllowSwagger", policy =>
             {
-                options.AddPolicy("AllowSwagger", policy =>
-                {
-                    policy.AllowAnyOrigin()
-                          .AllowAnyMethod()
-                          .AllowAnyHeader();
-                });
+                policy.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
             });
-            builder.Services.RegisterKairoApiDbContainer();
-            builder.Services.AddMediatR(cfg =>
+        });
+        builder.Services.RegisterKairoApiDbContainer();
+        builder.Services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(GetTaskByIdQuery).Assembly));
-            builder.Services.AddAutoMapper(cfg => { }, typeof(KairoApiProfile).Assembly); 
-            builder.Services.AddControllers();
-            builder.Services.AddOpenApi();
-            builder.Services.AppKairoApiContext(builder.Configuration);
+        builder.Services.AddAutoMapper(cfg => { }, typeof(KairoApiProfile).Assembly);
+        builder.Services.AddControllers();
+        builder.Services.AddOpenApi();
+        builder.Services.AppKairoApiContext(builder.Configuration);
 
-            builder.Services.AddSwaggerGen(c =>
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "Api Test",
-                    Version = "v1"
-                });
-
-                c.AddServer(new OpenApiServer
-                {
-                    Url = "https://localhost:7171",
-                    Description = "Local dev server"
-                });
+                Title = "Api Test",
+                Version = "v1"
             });
-
-            var app = builder.Build();
-
-            if (app.Environment.IsDevelopment())
+    
+            c.AddServer(new OpenApiServer
             {
-                app.MapOpenApi();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Kairo v1");
-                    c.RoutePrefix = "swagger";
-                });
-            }
-            app.UseCors("AllowSwagger");
+                Url = "http://localhost:3000",
+                Description = "Docker"
+            });
+        });
 
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
-            app.MapControllers();
-            app.MapGet("/health", () => Results.Ok(new { ok = true, dotnet = Environment.Version.ToString() }));
-            app.Run();
-        }
+        var app = builder.Build();
+        app.UseHttpsRedirection();
+            
+        app.MapOpenApi();
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Kairo v1");
+            c.RoutePrefix = "swagger";
+        });
+        app.UseCors("AllowSwagger");
+
+        app.UseAuthorization();
+        app.MapControllers();
+        app.MapGet("/health", () => Results.Ok(new { ok = true, dotnet = Environment.Version.ToString() }));
+        app.Run();
     }
 }
