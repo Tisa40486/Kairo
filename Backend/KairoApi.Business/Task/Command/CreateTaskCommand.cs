@@ -22,30 +22,36 @@ namespace KairoApi.Business.Task.Command
         public async System.Threading.Tasks.Task Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
             if (request.Id is null)
-            {
-                var statusEntity = await _uow.StatusRepository.GetByIdAsync(request.StatusDaoId);
-
-                var data = _mapper.Map<TaskDao>(request);
-                if (statusEntity is not null)
-                {
-                    data.StatusDaoId = statusEntity.Id;
-                    data.LKP_StatusDao = statusEntity;
-
-                }
-                await _uow.TaskRepository.AddAndSaveAsync(data);
-            }
+                await CreateTask(request);
             else
+                await EditTask(request);
+        }
+
+        private async System.Threading.Tasks.Task CreateTask(CreateTaskCommand request)
+        {
+            var statusEntity = await _uow.StatusRepository.GetByIdAsync(request.StatusDaoId);
+
+            var data = _mapper.Map<TaskDao>(request);
+            if (statusEntity is not null)
             {
-                var data = await _uow.TaskRepository.GetByIdAsync(request.Id.Value) ?? throw new Exception("Id not found");
-                var status = await _uow.StatusRepository.GetByIdAsync(request.StatusDaoId);
+                data.StatusDaoId = statusEntity.Id;
+                data.LKP_StatusDao = statusEntity;
 
-
-                data.LKP_StatusDao = status;
-
-                _mapper.Map<TaskInput, TaskDao>(request, data);
-
-                await _uow.TaskRepository.UpdateAsync(data);
             }
+            await _uow.TaskRepository.AddAndSaveAsync(data);
+        }
+
+        private async System.Threading.Tasks.Task EditTask(CreateTaskCommand request)
+        {
+            var data = await _uow.TaskRepository.GetByIdAsync(request.Id.Value) ??
+                       throw new Exception("Id not found");
+            var status = await _uow.StatusRepository.GetByIdAsync(request.StatusDaoId);
+
+            data.LKP_StatusDao = status;
+
+            _mapper.Map<TaskInput, TaskDao>(request, data);
+
+            await _uow.TaskRepository.UpdateAsync(data);
         }
     }
 }
