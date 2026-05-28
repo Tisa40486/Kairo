@@ -1,6 +1,8 @@
 using KairoApi.Business;
 using KairoApi.Business.Task.Query;
+using KairoApi.Data.DbContexts;
 using KairoApi.Db;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 namespace KairoApi.App;
@@ -43,6 +45,7 @@ public class Program
         });
 
         var app = builder.Build();
+
         app.UseHttpsRedirection();
             
         app.MapOpenApi();

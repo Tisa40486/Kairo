@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KairoApi.Db.DbContexts
 {
-    public class KairoApiDbContext : BaseDbContext, IKairoApiDbContext
+    public class KairoApiDbContext : BaseDbContext<KairoApiDbContext>, IKairoApiDbContext
     {
         public KairoApiDbContext(DbContextOptions<KairoApiDbContext> options) : base(options)
         {

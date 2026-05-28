@@ -8,6 +8,7 @@ namespace KairoApi.Db.UnitOfWork
         IKairoApiDbContext Context { get; }
         ITaskRepository TaskRepository { get; }
         IStatusRepository StatusRepository { get; }
+        IUserRepository UserRepository { get; }
         Task<int> SaveChangesAsync();
     }
 }
