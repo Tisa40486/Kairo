@@ -47,3 +47,20 @@ mysql
 ports:
   - "3306:3306"
 ```
+
+
+
+## Migration ef core 
+
+Use this code to create a migration 
+
+```bash
+  ASPNETCORE_ENVIRONMENT=Development dotnet ef migrations add MigrationName --project KairoApi.Db/KairoApi.Db.csproj --startup-project KairoApi/KairoApi.App.csproj
+```
+
+Use this code to update a migration 
+
+
+```bash
+  ASPNETCORE_ENVIRONMENT=Development dotnet ef database update --project KairoApi.Db/KairoApi.Db.csproj --startup-project KairoApi/KairoApi.App.csproj
+```
