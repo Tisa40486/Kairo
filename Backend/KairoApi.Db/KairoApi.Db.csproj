@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KairoApi.Data\KairoApi.Data.csproj" />
     <ProjectReference Include="..\KairoApi.Model\KairoApi.Model.csproj" />
   </ItemGroup>
 

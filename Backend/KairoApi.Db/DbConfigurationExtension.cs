@@ -21,7 +21,8 @@ namespace KairoApi.Db
                                         maxRetryCount: 5,
                                         maxRetryDelay: TimeSpan.FromSeconds(30),
                                         errorNumbersToAdd: null
-                                    );
+                                    )
+                                    .MigrationsAssembly("KairoApi.Db");
                         mysqlOptions.CommandTimeout((int)TimeSpan.FromMinutes(2).TotalSeconds);
                     }));
         }
