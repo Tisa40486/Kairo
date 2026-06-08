@@ -7,18 +7,15 @@ namespace KairoApi.Business
 {
     public class KairoApiProfile : Profile
     {
-        public KairoApiProfile() 
+        public KairoApiProfile()
         {
-            CreateMap<TaskDao, TaskReponse>()
-                .ForMember(
-                dest => dest.Status,
-                opt => opt.MapFrom(src => src.LKP_StatusDao)
-                );
+            CreateMap<TaskDao, TaskReponse>();
             CreateMap<TaskInput, TaskDao>();
 
 
+            CreateMap<UserDao, UserResponse>();
+            CreateMap<UserInput, UserDao>();
 
-            CreateMap<LKP_StatusDao, StatusResponse>();
         }
     }
 }

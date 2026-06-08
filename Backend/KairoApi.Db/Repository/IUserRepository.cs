@@ -7,4 +7,5 @@ namespace KairoApi.Db.Repository;
 public interface IUserRepository : IBaseRepository<IKairoApiDbContext, UserDao>    
 {
     
+    public  Task<UserDao> GetUserByEmailAsync(string email, bool withNoTracking = false);
 }

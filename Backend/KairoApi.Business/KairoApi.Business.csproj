@@ -7,7 +7,9 @@
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="16.1.1" />
+		<PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
 		<PackageReference Include="MediatR" Version="14.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.8" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.4" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.4" />
 	</ItemGroup>
@@ -16,9 +18,5 @@
     <ProjectReference Include="..\KairoApi.Db\KairoApi.Db.csproj" />
     <ProjectReference Include="..\KairoApi.Dto\KairoApi.Dto.csproj" />
   </ItemGroup>
-	
-	<ItemGroup>
-	  <Folder Include="User\Command\" />
-	</ItemGroup>
 
 </Project>

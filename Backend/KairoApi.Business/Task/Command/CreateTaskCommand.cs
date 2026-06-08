@@ -2,6 +2,7 @@
 using KairoApi.Db.UnitOfWork;
 using KairoApi.Dto;
 using KairoApi.Model;
+using KairoApi.Model.LKP;
 using MediatR;
 
 namespace KairoApi.Business.Task.Command
@@ -29,15 +30,8 @@ namespace KairoApi.Business.Task.Command
 
         private async System.Threading.Tasks.Task CreateTask(CreateTaskCommand request)
         {
-            var statusEntity = await _uow.StatusRepository.GetByIdAsync(request.StatusDaoId);
-
             var data = _mapper.Map<TaskDao>(request);
-            if (statusEntity is not null)
-            {
-                data.StatusDaoId = statusEntity.Id;
-                data.LKP_StatusDao = statusEntity;
-
-            }
+            data.Done = false;
             await _uow.TaskRepository.AddAndSaveAsync(data);
         }
 
@@ -45,9 +39,6 @@ namespace KairoApi.Business.Task.Command
         {
             var data = await _uow.TaskRepository.GetByIdAsync(request.Id.Value) ??
                        throw new Exception("Id not found");
-            var status = await _uow.StatusRepository.GetByIdAsync(request.StatusDaoId);
-
-            data.LKP_StatusDao = status;
 
             _mapper.Map<TaskInput, TaskDao>(request, data);
 

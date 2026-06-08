@@ -2,12 +2,14 @@
 using KairoApi.Business.Task.Query;
 using KairoApi.Dto;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KairoApi.App.Controllers
 {
     [ApiController]
     [Route("api/task")]
+    [Authorize]
     public class TaskController : ControllerBase
     {
         private readonly IMediator _mediator;

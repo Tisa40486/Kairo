@@ -12,12 +12,10 @@ namespace KairoApi.Business.Task.Command
     public class DeleteTaskCommandHandler : IRequestHandler<DeleteTaskCommand>
     {
         public readonly IKairoApiUnitOfWork _uow;
-        public readonly IMapper _mapper;
 
-        public DeleteTaskCommandHandler(IKairoApiUnitOfWork uow, IMapper mapper)
+        public DeleteTaskCommandHandler(IKairoApiUnitOfWork uow)
         {
             _uow = uow;
-            _mapper = mapper;
         }
 
         public async System.Threading.Tasks.Task Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
