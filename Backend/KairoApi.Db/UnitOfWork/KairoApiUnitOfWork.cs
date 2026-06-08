@@ -8,17 +8,14 @@ namespace KairoApi.Db.UnitOfWork
         public IKairoApiDbContext Context { get; }
 
         public ITaskRepository TaskRepository { get; }
-        public IStatusRepository StatusRepository { get; }
         public IUserRepository UserRepository { get; }
         public KairoApiUnitOfWork(
             IKairoApiDbContext context, 
             ITaskRepository taskRepository,
-            IStatusRepository statusRepository,
             IUserRepository userRepository)
         {
             Context = context;
             TaskRepository = taskRepository;
-            StatusRepository = statusRepository;
             UserRepository = userRepository;
         }
 

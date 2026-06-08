@@ -15,17 +15,5 @@ namespace KairoApi.Db.Repository.Implementation
             _kairoApiDbContext = context;
 
         }
-        public async override Task AddAndSaveAsync(TaskDao entity)
-        {
-            var status = await _kairoApiDbContext.Set<LKP_StatusDao>()
-                .FirstOrDefaultAsync(s => s.Id == entity.StatusDaoId);
-
-            if (status == null)
-                throw new Exception("Status introuvable");
-
-            entity.LKP_StatusDao = status;
-
-            await base.AddAndSaveAsync(entity);
-        }
     }
 }

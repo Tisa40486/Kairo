@@ -4,6 +4,7 @@ using KairoApi.Db.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KairoApi.Db.Migrations
 {
     [DbContext(typeof(KairoApiDbContext))]
-    partial class KairoApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260531165054_1.0.6")]
+    partial class _106
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,45 @@ namespace KairoApi.Db.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("KairoApi.Model.LKP.LKP_StatusDao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LKP_KairoApi_Status");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "To do"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Doing"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = " In Review"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Done"
+                        });
+                });
 
             modelBuilder.Entity("KairoApi.Model.TaskDao", b =>
                 {
@@ -33,10 +75,13 @@ namespace KairoApi.Db.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
-                    b.Property<bool?>("Done")
+                    b.Property<bool>("Done")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("TaskStatus")
+                    b.Property<int?>("LKP_StatusDaoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StatusDaoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -46,7 +91,9 @@ namespace KairoApi.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("KairoApi_Task", (string)null);
+                    b.HasIndex("LKP_StatusDaoId");
+
+                    b.ToTable("KairoApi_Task");
                 });
 
             modelBuilder.Entity("KairoApi.Model.UserDao", b =>
@@ -86,7 +133,16 @@ namespace KairoApi.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("KairoApi_User", (string)null);
+                    b.ToTable("KairoApi_User");
+                });
+
+            modelBuilder.Entity("KairoApi.Model.TaskDao", b =>
+                {
+                    b.HasOne("KairoApi.Model.LKP.LKP_StatusDao", "LKP_StatusDao")
+                        .WithMany()
+                        .HasForeignKey("LKP_StatusDaoId");
+
+                    b.Navigation("LKP_StatusDao");
                 });
 #pragma warning restore 612, 618
         }
